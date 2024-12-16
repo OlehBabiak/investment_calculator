@@ -1,10 +1,6 @@
 import { useState } from "react"
 
-export default function InputElement({ value, label, id }) {
-    const [inputValue, setInputValue] = useState(value)
-    function onInputChange(e) {
-        setInputValue(e.target.value);
-    }
+export default function InputElement({ value, label, id, onInputChange }) {
     return (
         <p>
             <label
@@ -12,11 +8,11 @@ export default function InputElement({ value, label, id }) {
                 {label}
             </label>
             <input
-                onChange={onInputChange}
+                onChange={(e) => onInputChange(id, e.target.value)}
                 type="number"
                 id={id}
                 required
-                value={inputValue}
+                value={value}
             />
         </p>
     )
