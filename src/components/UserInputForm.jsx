@@ -9,10 +9,6 @@ export default function UserInputForm() {
         { label: 'DURATION', id: 'duration', value: 10 },
     ]
 
-    function onInputChange() {
-
-    }
-
     return (
         <section id="user-input">
             <div className="input-group">
