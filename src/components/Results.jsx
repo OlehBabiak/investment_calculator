@@ -6,30 +6,39 @@ export default function Results({ formState }) {
         [id]: value
     }), {})
     const annualData = calculateInvestmentResults(investmentsResults);
+    const initialInvestment =
+        annualData[0].valueEndOfYear -
+        annualData[0].interest -
+        annualData[0].annualInvestment;
+
     return (
         <table id='result'>
             <caption>
-                Front-end web developer course 2024
+                Total results
             </caption>
             <thead>
                 <tr>
-                    {formState.map((row, i) => (
-                        <th
-                            key={i + row.label}>
-                            {row.label}
-                        </th>))}
+                    <th>Year</th>
+                    <th>Investment value</th>
+                    <th>Interest (Year)</th>
+                    <th>Total Interest</th>
+                    <th>Invested capital</th>
                 </tr>
             </thead>
             <tbody>
-                {annualData.map((row, i) => (
-                    <tr key={i + row.interest}>
-                        <td>{formatter.format(row.interest)}</td>
-                        <td>{formatter.format(row.annualInvestment)}</td>
-                        <td>{formatter.format(row.valueEndOfYear)}</td>
-
-                        <td>{row.year}</td>
-                    </tr>
-                ))}
+                {annualData.map(row => {
+                    const totalInterest = row.valueEndOfYear - row.annualInvestment * row.year - initialInvestment;
+                    const totalAmountInvestment = row.valueEndOfYear - totalInterest;
+                    return (
+                        <tr key={row.year}>
+                            <td>{row.year}</td>
+                            <td>{formatter.format(row.valueEndOfYear)}</td>
+                            <td>{formatter.format(row.interest)}</td>
+                            <td>{formatter.format(totalInterest)}</td>
+                            <td>{formatter.format(totalAmountInvestment)}</td>
+                        </tr>
+                    )
+                })}
             </tbody>
         </table>
     )
