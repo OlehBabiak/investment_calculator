@@ -25,6 +25,7 @@ export default function UserInputForm({ formState, onInputValueChange }) {
                         value={value}
                         key={label + i}
                         id={id}
+                        onInputChange={onInputValueChange}
                     />))}
             </div>
         </section>

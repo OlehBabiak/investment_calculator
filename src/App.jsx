@@ -12,6 +12,9 @@ const INITIAL_INPUT_PROPS = [
 
 function App() {
   const [formState, setFormState] = useState(INITIAL_INPUT_PROPS)
+
+  const inputIsValid = formState[3].value >= 1
+
   function onInputValueChange(id, newValue) {
     setFormState(prev =>
       prev.map(el =>
@@ -27,7 +30,8 @@ function App() {
       <UserInputForm
         formState={formState}
         onInputValueChange={onInputValueChange} />
-      <Results formState={formState} />
+      {!inputIsValid && <p className='center'>Please enter a duration greater than zero.</p>}
+      {inputIsValid && <Results formState={formState} />}
     </>
   )
 }

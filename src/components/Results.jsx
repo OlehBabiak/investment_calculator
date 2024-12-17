@@ -6,7 +6,7 @@ export default function Results({ formState }) {
         [id]: value
     }), {})
     const annualData = calculateInvestmentResults(investmentsResults);
-    const initialInvestment =
+    const initialInvestment = annualData &&
         annualData[0].valueEndOfYear -
         annualData[0].interest -
         annualData[0].annualInvestment;
